@@ -13,7 +13,7 @@ class AfiliadoController extends Controller
      */
     public function index()
     {
-        //
+        return 'index ok';
     }
 
     /**
@@ -34,7 +34,8 @@ class AfiliadoController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        $data = $request->all();
+        return response()->json('endpoint ok', 200);
     }
 
     /**

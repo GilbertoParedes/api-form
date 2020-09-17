@@ -18,13 +18,14 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::group(['prefix' => 'auth', 'middleware' => 'cors' ], function () {
+Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'Auth\AuthController@login')->name('login');
     Route::post('register', 'Auth\AuthController@register');
-    Route::resource('afiliados', 'AfiliadoController');
     
     Route::group(['middleware' => 'auth:api'], function() {
         Route::get('logout', 'Auth\AuthController@logout');
         Route::get('user', 'Auth\AuthController@user');
+        Route::resource('afiliados', 'AfiliadoController');
     });
 });
+

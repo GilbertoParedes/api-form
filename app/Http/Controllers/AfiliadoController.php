@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\afiliados;
 
 class AfiliadoController extends Controller
@@ -14,7 +16,9 @@ class AfiliadoController extends Controller
      */
     public function index()
     {
-        return 'index ok';
+        $afiliados = afiliados::all();
+
+        return response()->json($afiliados, 200);
     }
 
     /**
@@ -35,16 +39,30 @@ class AfiliadoController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request->all();
-       // dd($request->all());
+       $dateTime = strtotime($request->fecha_nacimiento);
+       
+       $date = Carbon::parse($request->fecha_nacimiento)->format('d/m/y');
+
+        if($data = $request->image_ine) {
+
+            $decode = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));
+            $info = @getimagesizefromstring($decode);
+            $extn = image_type_to_extension($info[2]);
+
+            if ($extn ==".png"){
+                $fullName = md5(time().uniqid()).$extn;
+                Storage::disk('public')->put('images/'.$fullName, $decode);
+            }
+        }
+
         $afiliado = [
             'name' => $request->name,
             'apellido' => $request->apellido,
             'telefono' => $request->telefono,
             'sexo' => $request->sexo,
-            'image_ine' => 'lñksdalñkasñd',
+            'image_ine' => $fullName,
             'estado_civil' => $request->estado_civil,
-            'fecha_nacimiento' => $request->fecha_nacimiento,
+            'fecha_nacimiento' => $date,
             'lugar_nacimiento' => $request->lugar_nacimiento,
             'estado_vivienda' => $request->estado_vivienda,
             'tiempo_viviendo' => $request->tiempo_viviendo,
@@ -58,7 +76,7 @@ class AfiliadoController extends Controller
         afiliados::insert($afiliado);
         
 
-        return response()->json('ok', 200);
+        return response()->json('Afiliado agregado', 200);
     }
 
     /**

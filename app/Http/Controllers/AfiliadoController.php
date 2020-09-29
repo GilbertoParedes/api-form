@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\afiliados;
 
 class AfiliadoController extends Controller
 {
@@ -34,8 +35,30 @@ class AfiliadoController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        return response()->json('endpoint ok', 200);
+        //return $request->all();
+       // dd($request->all());
+        $afiliado = [
+            'name' => $request->name,
+            'apellido' => $request->apellido,
+            'telefono' => $request->telefono,
+            'sexo' => $request->sexo,
+            'image_ine' => 'lñksdalñkasñd',
+            'estado_civil' => $request->estado_civil,
+            'fecha_nacimiento' => $request->fecha_nacimiento,
+            'lugar_nacimiento' => $request->lugar_nacimiento,
+            'estado_vivienda' => $request->estado_vivienda,
+            'tiempo_viviendo' => $request->tiempo_viviendo,
+            'calle' => $request->calle,
+            'colonia' => $request->colonia,
+            'dep_menores' => $request->dep_menores,
+            'dep_tercera_edad' => $request->dep_tercera_edad,
+            'vivienda_compartida' => $request->vivienda_compartida,
+        ];
+       
+        afiliados::insert($afiliado);
+        
+
+        return response()->json('ok', 200);
     }
 
     /**

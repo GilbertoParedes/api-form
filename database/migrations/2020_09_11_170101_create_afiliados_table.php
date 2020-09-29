@@ -29,7 +29,7 @@ class CreateAfiliadosTable extends Migration
             $table->string('calle');
             $table->string('colonia');
             $table->boolean('dep_menores');
-            $table->boolean('dep_tecera_edad');
+            $table->boolean('dep_tercera_edad');
             $table->boolean('Vivienda_compartida');
         });
     }

@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
 
-
 class AuthController extends Controller
 {
     public function login(Request $request) {

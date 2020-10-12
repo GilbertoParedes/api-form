@@ -18,7 +18,7 @@ class CreateAfiliadosTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('apellido');
-            $table->string('telefono');
+            $table->string('telefono')->nullable();
             $table->string('sexo');
             $table->string('image_ine');
             $table->string('estado_civil');
@@ -29,8 +29,14 @@ class CreateAfiliadosTable extends Migration
             $table->string('calle');
             $table->string('colonia');
             $table->boolean('dep_menores');
+            $table->string('cant_menores')->nullable();
             $table->boolean('dep_tercera_edad');
+            $table->string('cant_mayores')->nullable();
             $table->boolean('Vivienda_compartida');
+            $table->string('cant_viviendo')->nullable();
+            $table->string('celular');
+            $table->string('whatsapp')->nullable();
+            $table->string('facebook')->nullable();
         });
     }
 

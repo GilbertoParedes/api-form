@@ -69,8 +69,14 @@ class AfiliadoController extends Controller
             'calle' => $request->calle,
             'colonia' => $request->colonia,
             'dep_menores' => $request->dep_menores,
+            'cant_menores' => $request->cant_menores,
             'dep_tercera_edad' => $request->dep_tercera_edad,
+            'cant_mayores' => $request->cant_mayores,
             'vivienda_compartida' => $request->vivienda_compartida,
+            'cant_viviendo' => $request->cant_viviendo,
+            'celular' => $request->celular,
+            'whatsapp' => $request->whatsapp,
+            'facebook' => $request->facebook,
         ];
        
         afiliados::insert($afiliado);

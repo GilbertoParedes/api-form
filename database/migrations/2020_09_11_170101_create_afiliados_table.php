@@ -20,7 +20,7 @@ class CreateAfiliadosTable extends Migration
             $table->string('apellido');
             $table->string('telefono')->nullable();
             $table->string('sexo');
-            $table->string('image_ine');
+            $table->string('image_ine')->nullable();
             $table->string('estado_civil');
             $table->date('fecha_nacimiento');
             $table->string('lugar_nacimiento');

@@ -43,8 +43,8 @@ class AfiliadoController extends Controller
        
        $date = Carbon::parse($request->fecha_nacimiento)->format('d/m/y');
 
-        if($data = $request->image_ine) {
-
+        if($request->has('image_ine')) {
+            $data = $request->image_ine;
             $decode = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));
             $info = @getimagesizefromstring($decode);
             $extn = image_type_to_extension($info[2]);
@@ -53,6 +53,8 @@ class AfiliadoController extends Controller
                 $fullName = md5(time().uniqid()).$extn;
                 Storage::disk('public')->put('images/'.$fullName, $decode);
             }
+        }else {
+            $fullName = '';
         }
 
         $afiliado = [
